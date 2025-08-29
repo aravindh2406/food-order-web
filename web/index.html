@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Food Order Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Foodie's Delight </h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Menu</a></li>
+                <li><a href="#">Order Now</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="about">
+            <h2>About Us</h2>
+            <p>Welcome to Foodie's Delight, where we serve delicious and fresh meals. Order your favorite food online and enjoy fast delivery!</p>
+        </section>
+
+        <section id="menu">
+            <h2>Our Menu</h2>
+            <div class="menu-item">
+                <h3>Pizza</h3>
+                <img src="./pizza.jpg" alt="no img" width="150">
+
+                <p>Delicious cheesy pizza with your choice of toppings.</p>
+                <span>Rs.285</span>
+            </div>
+            <div class="menu-item">
+                <h3>Burger</h3>
+                <img src="https://i0.wp.com/thenutritionadventure.com/wp-content/uploads/2017/07/PourHouseAmericanBurger.jpg?resize=5236%2C3490" alt="no image" width="180">
+                <p>Juicy beef burger with crispy fries.</p>
+                <span>Rs.130</span>
+            </div>
+            <div class="menu-item">
+                <h3>Pasta</h3>
+                <img src="https://www.momontimeout.com/wp-content/uploads/2022/08/one-pot-pasta-chorizo-pasta-square.jpeg" alt="no image" width="150">
+                <p>Creamy pasta with rich Alfredo sauce.</p>
+                <span>Rs.80</span>
+            </div>
+            <div class="menu-item">
+                <h3>Momos</h3>
+                <img src="https://tse3.mm.bing.net/th?id=OIP.lqz2jfACvPNAPGDN84MqZQHaEH&pid=Api&P=0&h=220" alt="no image" width="150" height="130">
+                <p>tasty momos with healthy stuffings</p>
+                <span>Rs.50</span>
+            </div>
+        </section>
+
+        <section id="order">
+            <h2>Order Now</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+                <label for="food">Select Food Item:</label>
+                <select id="food" name="food" required>
+                    <option value="pizza">Pizza - Rs.285</option>
+                    <option value="burger">Burger - Rs.130</option>
+                    <option value="pasta">Pasta - Rs.80</option>
+                    <option value="Momos">Momos - Rs.50</option>
+                </select>
+
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+
+                <label for="address">Delivery Address:</label>
+                <textarea id="address" name="address" placeholder="Enter your address" required></textarea>
+
+                <button onclick="func1()" style="padding: 20px; margin-left: 500px; margin-right: 500px; font-size: x-large;">submit</button>
+                <script>
+                    function func1()
+                    {
+                        alert("form submitted successfully");
+                    }
+                </script>
+            </form>
+        </section>
+    </main><br><br><br>
+
+    <footer>
+        <p>&copy;2024 Foodie's Delight</p>
+    </footer>
+        
+
+</body>
+</html>
