@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Order Website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">🍴 Speedy Food</h1>
+  </header>
+
+  <main>
+    <section id="order">
+      <h3>Choose Your Delicious Meal</h3>
+
+      <!-- Pizza -->
+      <div class="menu-card">
+        <img src="https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_1280.jpg" alt="Pizza">
+        <div class="menu-info">
+          <h4>Pizza</h4>
+          <p>Rs.285</p>
+          <div class="menu-order">
+            <input type="checkbox" id="pizza" value="Pizza" data-price="285">
+            <label for="pizza">Add</label>
+            <input type="number" min="1" value="1" class="qty" data-id="pizza" disabled>
+          </div>
+        </div>
+      </div>
+
+      <!-- Burger -->
+      <div class="menu-card">
+        <img src="https://cdn.pixabay.com/photo/2014/10/23/18/05/burger-500054_1280.jpg" alt="Burger">
+        <div class="menu-info">
+          <h4>Burger</h4>
+          <p>Rs.130</p>
+          <div class="menu-order">
+            <input type="checkbox" id="burger" value="Burger" data-price="130">
+            <label for="burger">Add</label>
+            <input type="number" min="1" value="1" class="qty" data-id="burger" disabled>
+          </div>
+        </div>
+      </div><br>
+
+      <!-- Pasta -->
+      <div class="menu-card">
+        <img src="canva-pasta-with-tomato-sauce-MAEFncKV0BI.jpg" alt="Pasta">
+        <div class="menu-info">
+          <h4>Pasta</h4>
+          <p>Rs.80</p>
+          <div class="menu-order">
+            <input type="checkbox" id="pasta" value="Pasta" data-price="80">
+            <label for="pasta">Add</label>
+            <input type="number" min="1" value="1" class="qty" data-id="pasta" disabled>
+          </div>
+        </div>
+      </div>
+
+      <!-- Momos -->
+      <div class="menu-card">
+        <img src="./tibetian-dumplings-momo-with-chicken-meat-or-vegetables-photo.jpg" alt="Momos">
+        <div class="menu-info">
+          <h4>Momos</h4>
+          <p>Rs.50</p>
+          <div class="menu-order">
+            <input type="checkbox" id="momos" value="Momos" data-price="50">
+            <label for="momos">Add</label>
+            <input type="number" min="1" value="1" class="qty" data-id="momos" disabled>
+          </div>
+        </div>
+      </div>
+
+      <p id="total">Total: Rs. 0</p>
+
+      <h2>🛒 Order Now</h2>
+      <form id="orderForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required><br><br>
+
+        <label for="address">Delivery Address:</label><br>
+        <textarea id="address" name="address" placeholder="Enter your address" required></textarea><br><br>
+
+        <button type="submit">Submit Order</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy;2025 Foodie's Delight</p>
+  </footer>
+
+  <script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const qtyInputs = document.querySelectorAll('.qty');
+    const totalDisplay = document.getElementById('total');
+    const form = document.getElementById('orderForm');
+
+    function calculateTotal() {
+      let total = 0;
+      checkboxes.forEach(cb => {
+        if (cb.checked) {
+          const qty = document.querySelector(`.qty[data-id="${cb.id}"]`).value;
+          total += parseInt(cb.dataset.price) * parseInt(qty);
+        }
+      });
+      totalDisplay.textContent = "Total: Rs. " + total;
+    }
+
+    checkboxes.forEach(cb => {
+      cb.addEventListener('change', () => {
+        const qtyInput = document.querySelector(`.qty[data-id="${cb.id}"]`);
+        qtyInput.disabled = !cb.checked;
+        calculateTotal();
+      });
+    });
+
+    qtyInputs.forEach(input => {
+      input.addEventListener('input', calculateTotal);
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      let orderItems = [];
+      let total = 0;
+      checkboxes.forEach(cb => {
+        if (cb.checked) {
+          const qty = document.querySelector(`.qty[data-id="${cb.id}"]`).value;
+          const price = parseInt(cb.dataset.price);
+          const itemTotal = price * qty;
+          total += itemTotal;
+          orderItems.push({ product: cb.value, qty, price, itemTotal });
+        }
+      });
+
+      const orderDetails = {
+        name: document.getElementById("name").value,
+        address: document.getElementById("address").value,
+        items: orderItems,
+        total: total,
+        time: new Date().toLocaleString()
+      };
+
+      localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
+      window.location.href = "invoice.html";
+    });
+  </script>
+</body>
+</html>
